@@ -19,3 +19,4 @@ class BaseLabel:
     @abstractmethod
     def night_enter_time(self):
         pass
+
