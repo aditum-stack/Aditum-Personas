@@ -1,9 +1,9 @@
 from .BaseLabel import BaseLabel
 
 
-class CommonLabel(BaseLabel):
+class BusyLabel(BaseLabel):
     """
-    正常作息: 朝九晚五
+    忙碌
     """
 
     def __init__(self):
@@ -12,7 +12,7 @@ class CommonLabel(BaseLabel):
         self.night_enter_time = self.night_enter_time()
 
     def morning_out_time(self):
-        return "9:00:00"
+        return "8:00:00"
 
     def night_enter_time(self):
-        return "17:00:00"
+        return "22:00:00"

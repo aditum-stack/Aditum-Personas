@@ -1,5 +1,4 @@
 import pymysql
-from personas.entity import Record
 
 
 class BaseDao:
@@ -8,10 +7,10 @@ class BaseDao:
     """
 
     def __init__(self,
-                 host='127.0.0.1',
+                 host='47.100.236.64',
                  port=3306, user='root',
                  password='wangshihao',
-                 database='aditum_mocker',
+                 database='aditum',
                  charset='utf8'):
         self.host = host
         self.port = port
@@ -50,14 +49,16 @@ class BaseDao:
     def select_all_record(self):
         select_sql = 'SELECT id, imei, personnel_id, visite_time, visite_status, is_deleted FROM record'
 
+        # for i in range(1,100):
         try:
             self.cursor.execute(select_sql)
 
-            record = self.cursor.fetchone()
+            record = self.cursor.fetchall()
 
             print(record)
         except:
             print("select_all_record is failed")
+            # break
 
 
 dao = BaseDao()
