@@ -1,8 +1,14 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Person:
-    """
-    用户信息
-    """
-
-    def __init__(self, name):
-        self.name = name
-
+    id: int
+    personnelId: str
+    personnelName: str
+    communityId: str
+    personnelAddress: str
+    personnelPhone: str
+    createTime: str
+    updateTime: str
+    isDeleted: int
