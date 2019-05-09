@@ -12,3 +12,14 @@ class Person:
     createTime: str
     updateTime: str
     isDeleted: int
+
+    def __init__(self, json):
+        self.id = json.get("id")
+        self.personnelId = json.get("personnelId")
+        self.personnelName = json.get("personnelName")
+        self.communityId = json.get("communityId")
+        self.personnelAddress = json.get("personnelAddress")
+        self.personnelPhone = json.get("personnelPhone")
+        self.createTime = json.get("createTime")
+        self.updateTime = json.get("updateTime")
+        self.isDeleted = json.get("isDeleted")

@@ -1,13 +1,12 @@
-from ..entity.Person import Person
-
 import json
+from entity.Person import *
+
 import requests
 
 personUrl = "http://localhost:9006/person"
 recordUrl = "http://localhost:9006/record"
 
 headers = {'content-type': 'application/json'}
-requestData = {}
 
 
 def getForAllPerson():
@@ -42,12 +41,15 @@ recordList = getForAllRecord()
 for person in personList:
     print(person)
 
-    personEntity = Person(person.get("id"))
+    personEntity = Person(person)
 
-    recordByPersonId = getForRecordByPersonId(person.get("personnelId"))
+    recordByPersonId = getForRecordByPersonId(personEntity.personnelId)
 
     for record in recordByPersonId:
         print(record)
+
+
+
 
 # print(getForAllPerson())
 # print(json.loads(getForPerson(requestData).text).get("data")[0])
