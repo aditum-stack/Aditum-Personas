@@ -9,3 +9,11 @@ class Record:
     visiteTime: str
     visiteStatus: int
     isDeleted: int
+
+    def __init__(self, json):
+        self.id = json.get("id")
+        self.imei = json.get("imei")
+        self.personnelId = json.get("personnelId")
+        self.visiteTime = json.get("visiteTime")
+        self.visiteStatus = json.get("visiteStatus")
+        self.isDeleted = json.get("isDeleted")
