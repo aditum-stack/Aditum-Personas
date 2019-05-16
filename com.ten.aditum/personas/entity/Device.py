@@ -16,6 +16,8 @@ class Device:
     isDeleted: int
 
     def __init__(self, json):
+        if json.get("id") is None:
+            pass
         self.id = json.get("id")
         self.imei = json.get("imei")
         self.alias = json.get("alias")

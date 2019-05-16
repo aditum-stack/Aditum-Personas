@@ -44,6 +44,8 @@ def getForAllPerson():
     :return: person[]
     """
     personJsonList = requests.get(personUrl, params={}, headers=headers).json().get("data")
+    if personJsonList == "":
+        return None
     personList = []
     for personJson in personJsonList:
         personEntity = Person(personJson)
@@ -58,6 +60,8 @@ def getForAllRecord():
     :return: record[]
     """
     recordJsonList = requests.get(recordUrl, params={}, headers=headers).json().get("data")
+    if recordJsonList == "":
+        return None
     recordList = []
     for recordJson in recordJsonList:
         recordEntity = Record(recordJson)
@@ -76,6 +80,8 @@ def getForRecordByPersonId(personnelId):
     """
     request = {"personnelId": personnelId}
     recordJsonList = requests.get(recordUrl, params=request, headers=headers).json().get("data")
+    if recordJsonList == "":
+        return None
     recordList = []
     for recordJson in recordJsonList:
         recordEntity = Record(recordJson)
@@ -92,6 +98,8 @@ def getForAccessTimeByPersonId(personnelId):
     """
     request = {"personnelId": personnelId}
     accessTimeJson = requests.get(accessPersonUrl + "/time", params=request, headers=headers).json().get("data")
+    if accessTimeJson == "":
+        return None
     accessTime = AccessTime(accessTimeJson)
     return accessTime
 
@@ -105,6 +113,8 @@ def getForAccessAddressByPersonId(personnelId):
     """
     request = {"personnelId": personnelId}
     accessAddressJson = requests.get(accessPersonUrl + "/address", params=request, headers=headers).json().get("data")
+    if accessAddressJson == "":
+        return None
     accessAddress = AccessAddress(accessAddressJson)
     return accessAddress
 

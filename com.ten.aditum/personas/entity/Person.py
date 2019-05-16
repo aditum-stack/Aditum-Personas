@@ -14,6 +14,8 @@ class Person:
     isDeleted: int
 
     def __init__(self, json):
+        if json.get("id") is None:
+            pass
         self.id = json.get("id")
         self.personnelId = json.get("personnelId")
         self.personnelName = json.get("personnelName")
