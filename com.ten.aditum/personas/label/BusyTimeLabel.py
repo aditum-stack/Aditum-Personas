@@ -3,7 +3,7 @@ from .BaseTimeLabel import BaseTimeLabel
 
 class BusyTimeLabel(BaseTimeLabel):
     """
-    忙碌九九六
+    忙碌工作
     """
 
     def __init__(self):

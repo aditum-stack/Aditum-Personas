@@ -152,19 +152,3 @@ def testForAllApi():
 
 if __name__ == '__main__':
     testForAllApi()
-
-    # personList = getForAllPerson()
-    # recordList = getForAllRecord()
-    #
-    # for person in personList:
-    #     # print(person)
-    #
-    #     personEntity = Person(person)
-    #
-    #     recordByPersonId = getForRecordByPersonId(personEntity.personnelId)
-    #
-    #     for record in recordByPersonId:
-    #         print(record)
-
-    # print(getForAllPerson())
-    # print(json.loads(getForPerson(requestData).text).get("data")[0])

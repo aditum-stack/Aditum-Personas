@@ -3,7 +3,7 @@ from label.BaseTimeLabel import BaseTimeLabel
 
 class EasyTimeLabel(BaseTimeLabel):
     """
-    轻松工作九五五
+    轻松工作
     """
 
     def __init__(self):

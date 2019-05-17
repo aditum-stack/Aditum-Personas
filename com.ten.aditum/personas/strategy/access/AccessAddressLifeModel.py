@@ -7,6 +7,7 @@ from label.BaseTimeLabel import BaseTimeLabel
 from label.BusyTimeLabel import BusyTimeLabel
 from label.CommonTimeLabel import CommonTimeLabel
 from label.EasyTimeLabel import EasyTimeLabel
+from util import TimeUtil
 
 
 def initPersonData():
@@ -40,3 +41,11 @@ if __name__ == '__main__':
     print(lableList)
 
     print("数据获取成功，开始分析...")
+
+    print(lableList[0])
+    print(lableList[0].morning_out_time)
+    ftime = TimeUtil.timeToS(lableList[0].morning_out_time)
+    print(ftime)
+
+
+    a

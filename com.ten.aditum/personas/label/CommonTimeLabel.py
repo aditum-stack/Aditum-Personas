@@ -3,7 +3,7 @@ from .BaseTimeLabel import BaseTimeLabel
 
 class CommonTimeLabel(BaseTimeLabel):
     """
-    弹性工作朝十晚六
+    弹性工作
     """
 
     def __init__(self):
