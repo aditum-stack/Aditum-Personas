@@ -69,7 +69,7 @@ def kmeansClustering(entitySet, n_clusters=3):
     return y_pred
 
 
-def showAndSave(entitySet, y_pred):
+def showAndSave(entitySet, y_pred, show=0):
     """
     根据聚类结果展示散点图
     :param entitySet: 聚类数据
@@ -83,7 +83,9 @@ def showAndSave(entitySet, y_pred):
     plt.xlabel("Earliest")
     plt.ylabel("Latest")
     plt.savefig(image_path)
-    plt.show()
+    # 图片展示
+    if show != 0:
+        plt.show()
 
 
 def base64img():
@@ -104,17 +106,17 @@ def run():
     执行脚本，并返回图片的base64字符串
     :return: base64图片字符串
     """
-    print("用户时间行为偏好聚类分析...开始")
+    # print("用户时间行为偏好聚类分析...开始")
 
     # Person集合
     personList = initPersonData()
-    print(personList)
+    # print(personList)
 
     # PersonAccessTime集合
     personAccessTimeList = initAccessTimeData(personList=personList)
-    print(personAccessTimeList)
+    # print(personAccessTimeList)
 
-    print("数据获取成功，开始分析...")
+    # print("数据获取成功，开始分析...")
 
     # 初始化数据集
     timeEntitySet = initEntitySet(personAccessTimeList)
@@ -123,14 +125,15 @@ def run():
     y_pred = kmeansClustering(timeEntitySet, 3)
 
     # 可视化结果并保存图片
-    showAndSave(timeEntitySet, y_pred)
+    showAndSave(timeEntitySet, y_pred, show=0)
 
-    print("用户时间行为偏好聚类分析...结束")
+    # print("用户时间行为偏好聚类分析...结束")
 
     # base64
     base64 = base64img()
     print(base64)
     return base64
+
 
 # Java runtime invoke
 run()
