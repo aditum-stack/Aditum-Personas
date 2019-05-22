@@ -136,4 +136,5 @@ def run():
 
 
 # Java runtime invoke
+# 参数：社区ID communityId
 run()

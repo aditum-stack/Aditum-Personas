@@ -5,6 +5,9 @@
 import json
 import requests
 
+from entity.DeviceAccessCount import DeviceAccessCount
+from util import TimeUtil
+
 """
 数据结构类
 """
@@ -37,13 +40,18 @@ headers = {'content-type': 'application/json'}
 
 # 获取全量数据
 
-def getForAllPerson():
+def getForAllPerson(communityId=""):
     """
     获取所有person
-
+    :param: communityId社区ID，若不填，则全量
     :return: person[]
     """
-    personJsonList = requests.get(personUrl, params={}, headers=headers).json().get("data")
+    if communityId != "":
+        request = {"communityId": communityId}
+        personJsonList = requests.get(personUrl, params=request, headers=headers).json().get("data")
+    else:
+        personJsonList = requests.get(personUrl, params={}, headers=headers).json().get("data")
+
     if personJsonList == "":
         return None
     personList = []
@@ -119,35 +127,58 @@ def getForAccessAddressByPersonId(personnelId):
     return accessAddress
 
 
+# 获取Device相关数据
+
+def getForYesterdayDeviceCount():
+    """
+    获取T+1的所有设备按天访问热度
+
+    :return: deviceCountList
+    """
+    yesterday = TimeUtil.getYesterdayDate()
+    request = {"logDate": yesterday}
+    deviceCountJson = requests.get(accessDeviceUrl + "/countByDay", params=request, headers=headers).json().get("data")
+    if deviceCountJson == "":
+        return None
+    deviceCountList = []
+    for deviceCountJson in deviceCountJson:
+        deviceCount = DeviceAccessCount(deviceCountJson)
+        deviceCountList.append(deviceCount)
+    return deviceCountList
+
+
 def testForAllApi():
     """
     接口测试
     """
-    # 全量测试
-    personList = getForAllPerson()
-    print(personList)
-    print()
+    # # 全量测试
+    # personList = getForAllPerson()
+    # print(personList)
+    # print()
+    #
+    # recordList = getForAllRecord()
+    # print(recordList)
+    # print()
+    #
+    # # 单条Person
+    # thePerson = personList[0]
+    # thPersonnelId = thePerson.personnelId
+    #
+    # # 单条Person测试
+    # record = getForRecordByPersonId(thPersonnelId)
+    # print(record)
+    # print()
+    #
+    # time = getForAccessTimeByPersonId(thPersonnelId)
+    # print(time)
+    # print()
+    #
+    # address = getForAccessAddressByPersonId(thPersonnelId)
+    # print(address)
+    # print()
 
-    recordList = getForAllRecord()
-    print(recordList)
-    print()
-
-    # 单条Person
-    thePerson = personList[0]
-    thPersonnelId = thePerson.personnelId
-
-    # 单条Person测试
-    record = getForRecordByPersonId(thPersonnelId)
-    print(record)
-    print()
-
-    time = getForAccessTimeByPersonId(thPersonnelId)
-    print(time)
-    print()
-
-    address = getForAccessAddressByPersonId(thPersonnelId)
-    print(address)
-    print()
+    # device测试
+    print(getForYesterdayDeviceCount())
 
 
 if __name__ == '__main__':

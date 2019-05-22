@@ -1,3 +1,6 @@
+import datetime
+
+
 def timeToS(t):
     """
     时分秒转换成秒
@@ -24,11 +27,42 @@ def sToTime(seconds):
     return "%02d:%02d:%02d" % (h, m, s)
 
 
+def getTodayDate():
+    """
+    获取当天的日期信息
+
+    :return: yyyy-MM-dd
+    """
+    # 日期前缀 20xx年
+    date_prefix = "20"
+    today = datetime.date.today()
+    formatted_today = today.strftime('%y-%m-%d')
+    return date_prefix + formatted_today
+
+
+def getYesterdayDate():
+    """
+    获取昨天的日期信息
+
+    :return: yyyy-MM-dd
+    """
+    today = datetime.date.today()
+    oneday = datetime.timedelta(days=1)
+    yesterday = today - oneday
+    return yesterday
+
+
 if __name__ == '__main__':
-    time = "8:12:32"
+    # time = "8:12:32"
 
-    seconds = timeToS(time)
-    print(seconds)
+    # seconds = timeToS(time)
+    # print(seconds)
 
-    newTime = sToTime(seconds)
-    print(newTime)
+    # newTime = sToTime(seconds)
+    # print(newTime)
+
+    today = getTodayDate()
+    print(today)
+
+    yesterday = getYesterdayDate()
+    print(yesterday)
