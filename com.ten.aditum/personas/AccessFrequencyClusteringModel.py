@@ -117,7 +117,7 @@ def run():
     y_pred = kmeansClustering(frequencyEntitySet, 4)
 
     # 可视化结果并保存图片
-    showAndSave(frequencyEntitySet, y_pred, show=1)
+    showAndSave(frequencyEntitySet, y_pred, show=0)
 
     # print("用户门禁使用依赖度聚类分析...结束")
 

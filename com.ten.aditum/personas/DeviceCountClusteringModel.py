@@ -99,7 +99,7 @@ def run():
     y_pred = kmeansClustering(countEntitySet, 4)
 
     # 可视化结果并保存图片
-    showAndSave(countEntitySet, y_pred, show=1)
+    showAndSave(countEntitySet, y_pred, show=0)
 
     # print("设备T+1访问热度聚类分析...结束")
 
