@@ -96,7 +96,7 @@ def run():
     countEntitySet = initEntitySet(deviceCountList)
 
     # 聚类分析
-    y_pred = kmeansClustering(countEntitySet, 3)
+    y_pred = kmeansClustering(countEntitySet, 4)
 
     # 可视化结果并保存图片
     showAndSave(countEntitySet, y_pred, show=1)
