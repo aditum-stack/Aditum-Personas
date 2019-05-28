@@ -122,10 +122,10 @@ def run():
     timeEntitySet = initEntitySet(personAccessTimeList)
 
     # 聚类分析
-    y_pred = kmeansClustering(timeEntitySet, 3)
+    y_pred = kmeansClustering(timeEntitySet, 4)
 
     # 可视化结果并保存图片
-    showAndSave(timeEntitySet, y_pred, show=0)
+    showAndSave(timeEntitySet, y_pred, show=1)
 
     # print("用户时间行为偏好聚类分析...结束")
 

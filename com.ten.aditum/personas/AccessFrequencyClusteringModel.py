@@ -12,6 +12,15 @@ import BackRemoteApi
 # 保存的临时分析图片的名字
 image_path = os.getcwd() + '\\accessFrequencyClustering.png'
 
+# 日期权重增加
+day_count_power = 5
+
+# 聚类中心
+clustering = 5
+
+# 1展示图片 0不展示
+show = 1
+
 
 def initPersonData():
     """
@@ -44,6 +53,8 @@ def initEntitySet(personAccessTimeList):
     for personAccessTime in personAccessTimeList:
         count = personAccessTime.averageDailyFrequencyCount
         frequency = personAccessTime.averageDailyFrequency
+        # 权重升级: 天数*day_count_power
+        count *= day_count_power
         # 添加数据集
         frequencyEntity = [count, frequency]
         frequencyEntitySet.append(frequencyEntity)
@@ -72,7 +83,7 @@ def showAndSave(entitySet, y_pred, show=0):
     yData = [n[1] for n in entitySet]
     plt.scatter(xData, yData, c=y_pred, marker='x')
     plt.title("user access frequency clustering")
-    plt.xlabel("use count")
+    plt.xlabel("use count * " + str(day_count_power))
     plt.ylabel("use frequency")
     plt.savefig(image_path)
     # 图片展示
@@ -114,10 +125,10 @@ def run():
     frequencyEntitySet = initEntitySet(personAccessTimeList)
 
     # 聚类分析
-    y_pred = kmeansClustering(frequencyEntitySet, 4)
+    y_pred = kmeansClustering(frequencyEntitySet, clustering)
 
     # 可视化结果并保存图片
-    showAndSave(frequencyEntitySet, y_pred, show=0)
+    showAndSave(frequencyEntitySet, y_pred, show=show)
 
     # print("用户门禁使用依赖度聚类分析...结束")
 

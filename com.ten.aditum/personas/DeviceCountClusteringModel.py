@@ -88,7 +88,7 @@ def run():
     # print("设备T+1访问热度聚类分析...开始")
 
     deviceCountList = initDeviceCountData()
-    # print(deviceCountList)
+    print(deviceCountList)
 
     # print("数据获取成功，开始分析...")
 
@@ -99,7 +99,7 @@ def run():
     y_pred = kmeansClustering(countEntitySet, 4)
 
     # 可视化结果并保存图片
-    showAndSave(countEntitySet, y_pred, show=0)
+    showAndSave(countEntitySet, y_pred, show=1)
 
     # print("设备T+1访问热度聚类分析...结束")
 
