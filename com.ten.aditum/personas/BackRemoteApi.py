@@ -54,6 +54,8 @@ def getForAllPerson(communityId=""):
 
     if personJsonList == "":
         return None
+    if personJsonList is None:
+        return None
     personList = []
     for personJson in personJsonList:
         personEntity = Person(personJson)
@@ -69,6 +71,8 @@ def getForAllRecord():
     """
     recordJsonList = requests.get(recordUrl, params={}, headers=headers).json().get("data")
     if recordJsonList == "":
+        return None
+    if recordJsonList is None:
         return None
     recordList = []
     for recordJson in recordJsonList:
@@ -90,6 +94,8 @@ def getForRecordByPersonId(personnelId):
     recordJsonList = requests.get(recordUrl, params=request, headers=headers).json().get("data")
     if recordJsonList == "":
         return None
+    if recordJsonList is None:
+        return None
     recordList = []
     for recordJson in recordJsonList:
         recordEntity = Record(recordJson)
@@ -108,6 +114,8 @@ def getForAccessTimeByPersonId(personnelId):
     accessTimeJson = requests.get(accessPersonUrl + "/time", params=request, headers=headers).json().get("data")
     if accessTimeJson == "":
         return None
+    if accessTimeJson is None:
+        return None
     accessTime = AccessTime(accessTimeJson)
     return accessTime
 
@@ -122,6 +130,8 @@ def getForAccessAddressByPersonId(personnelId):
     request = {"personnelId": personnelId}
     accessAddressJson = requests.get(accessPersonUrl + "/address", params=request, headers=headers).json().get("data")
     if accessAddressJson == "":
+        return None
+    if accessAddressJson is None:
         return None
     accessAddress = AccessAddress(accessAddressJson)
     return accessAddress
@@ -139,6 +149,8 @@ def getForYesterdayDeviceCount():
     request = {"logDate": yesterday}
     deviceCountJson = requests.get(accessDeviceUrl + "/countByDay", params=request, headers=headers).json().get("data")
     if deviceCountJson == "":
+        return None
+    if deviceCountJson is None:
         return None
     deviceCountList = []
     for deviceCountJson in deviceCountJson:
