@@ -1,6 +1,7 @@
 """
 基于设备按天访问热度[DAY访问热度]的一维聚类分析
 """
+import random
 
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
@@ -32,7 +33,7 @@ def initEntitySet(deviceCountList):
     for deviceCount in deviceCountList:
         # 当天访问量
         accessCount = deviceCount.accessCount
-        countEntity = [accessCount, accessCount]
+        countEntity = [accessCount + random.random(), accessCount + random.random()]
         countEntitySet.append(countEntity)
     return countEntitySet
 

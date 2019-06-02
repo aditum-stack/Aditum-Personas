@@ -136,6 +136,7 @@ def getForYesterdayDeviceCount():
     :return: deviceCountList
     """
     yesterday = TimeUtil.getYesterdayDate()
+    # test数据 yesterday = "2019-05-28"
     request = {"logDate": yesterday}
     deviceCountJson = requests.get(accessDeviceUrl + "/countByDay", params=request, headers=headers).json().get("data")
     if deviceCountJson == "":
