@@ -1,6 +1,7 @@
 """
 基于访问时间AccessTime[注册天数,每天访问频率]的聚类分析，用于分析用户组类型
 """
+import logging
 
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
@@ -19,6 +20,9 @@ clustering = 4
 
 # 1展示图片 0不展示
 show = 1
+
+# 1打印日志 0不打印
+enableLog = 1
 
 
 def initPersonData():
@@ -45,11 +49,13 @@ def initEntitySet(personAccessTimeList):
     """
     初始化聚类数据集
     :param personAccessTimeList: 用户时间行为数据
-    :return: 二维矩阵 [[],[]...]
+    :return: 二维矩阵 [[],[]...], 用户ID一维数组
     """
     frequencyEntitySet = []
+    personnelIdSet = []
     # 数据集
     for personAccessTime in personAccessTimeList:
+        personnelId = personAccessTime.personnelId
         count = personAccessTime.averageDailyFrequencyCount
         frequency = personAccessTime.averageDailyFrequency
         # 权重升级: 天数*day_count_power
@@ -57,7 +63,8 @@ def initEntitySet(personAccessTimeList):
         # 添加数据集
         frequencyEntity = [count, frequency]
         frequencyEntitySet.append(frequencyEntity)
-    return frequencyEntitySet
+        personnelIdSet.append(personnelId)
+    return frequencyEntitySet, personnelIdSet
 
 
 def kmeansClustering(entitySet, n_clusters=3):
@@ -68,6 +75,7 @@ def kmeansClustering(entitySet, n_clusters=3):
     clf = KMeans(n_clusters=n_clusters)
     # 直接对数据进行聚类，聚类不需要进行预测
     y_pred = clf.fit_predict(entitySet)
+    print(type(clf.labels_))
     return y_pred
 
 
@@ -121,7 +129,7 @@ def run():
     # print("数据获取成功，开始分析...")
 
     # 初始化数据集
-    frequencyEntitySet = initEntitySet(personAccessTimeList)
+    frequencyEntitySet, personnelIdSet = initEntitySet(personAccessTimeList)
 
     # 聚类分析
     y_pred = kmeansClustering(frequencyEntitySet, clustering)
@@ -129,7 +137,10 @@ def run():
     # 可视化结果并保存图片
     showAndSave(frequencyEntitySet, y_pred, show=show)
 
-    # print("用户门禁使用依赖度聚类分析...结束")
+    print("用户门禁使用依赖度聚类分析...结束")
+
+    for i in range(len(y_pred)):
+        print(personnelIdSet[i] + " " + str(y_pred[i]))
 
     # base64
     base64 = base64img()
