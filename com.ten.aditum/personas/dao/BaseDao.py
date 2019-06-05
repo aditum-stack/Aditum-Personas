@@ -1,6 +1,7 @@
 import pymysql
 
 
+@DeprecationWarning
 class BaseDao:
     """
     数据库操作类
