@@ -7,11 +7,16 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import base64
 import os
-from util import TimeUtil
-import BackRemoteApi
+from api import BackRemoteApi
 
 # 保存的临时分析图片的名字
 image_path = os.getcwd() + '\\deviceCountClustering.png'
+
+# 聚类中心
+clustering = 4
+
+# 1展示图片 0不展示
+show = 1
 
 
 def initDeviceCountData():
@@ -97,10 +102,10 @@ def run():
     countEntitySet = initEntitySet(deviceCountList)
 
     # 聚类分析
-    y_pred = kmeansClustering(countEntitySet, 4)
+    y_pred = kmeansClustering(countEntitySet, clustering)
 
     # 可视化结果并保存图片
-    showAndSave(countEntitySet, y_pred, show=1)
+    showAndSave(countEntitySet, y_pred, show=show)
 
     # print("设备T+1访问热度聚类分析...结束")
 

@@ -1,8 +1,6 @@
 # 数据展示模块
 
-import matplotlib.pyplot as plt
-
-import BackRemoteApi
+from api import BackRemoteApi
 
 
 def showCommunity():

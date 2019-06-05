@@ -6,8 +6,7 @@ from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import base64
 import os
-from util import TimeUtil
-import BackRemoteApi
+from api import BackRemoteApi
 
 # 保存的临时分析图片的名字
 image_path = os.getcwd() + '\\accessFrequencyClustering.png'
@@ -16,7 +15,7 @@ image_path = os.getcwd() + '\\accessFrequencyClustering.png'
 day_count_power = 5
 
 # 聚类中心
-clustering = 5
+clustering = 4
 
 # 1展示图片 0不展示
 show = 1

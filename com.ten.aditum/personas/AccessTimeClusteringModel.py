@@ -7,10 +7,16 @@ import matplotlib.pyplot as plt
 import base64
 import os
 from util import TimeUtil
-import BackRemoteApi
+from api import BackRemoteApi
 
 # 保存的临时分析图片的名字
 image_path = os.getcwd() + '\\accessTimeClustering.png'
+
+# 聚类中心
+clustering = 3
+
+# 1展示图片 0不展示
+show = 1
 
 
 def initPersonData():
@@ -122,10 +128,10 @@ def run():
     timeEntitySet = initEntitySet(personAccessTimeList)
 
     # 聚类分析
-    y_pred = kmeansClustering(timeEntitySet, 4)
+    y_pred = kmeansClustering(timeEntitySet, clustering)
 
     # 可视化结果并保存图片
-    showAndSave(timeEntitySet, y_pred, show=1)
+    showAndSave(timeEntitySet, y_pred, show=show)
 
     # print("用户时间行为偏好聚类分析...结束")
 

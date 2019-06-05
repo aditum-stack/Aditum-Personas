@@ -19,13 +19,10 @@ class BaseDao:
         self.password = password
         self.database = database
         self.charset = charset
-
         # 数据库连接对象
         self.db = self.connect()
-
         # 数据库游标对象
         self.cursor = self.db.cursor()
-
         # 测试数据库连接
         self.select_version()
 
@@ -49,13 +46,10 @@ class BaseDao:
     # 查询所有record记录
     def select_all_record(self):
         select_sql = 'SELECT id, imei, personnel_id, visite_time, visite_status, is_deleted FROM record'
-
         # for i in range(1,100):
         try:
             self.cursor.execute(select_sql)
-
             record = self.cursor.fetchall()
-
             print(record)
         except:
             print("select_all_record is failed")

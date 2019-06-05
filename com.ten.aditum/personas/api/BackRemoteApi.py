@@ -3,6 +3,7 @@
 """
 
 import json
+import logging
 import requests
 
 from entity.DeviceAccessCount import DeviceAccessCount
@@ -19,18 +20,23 @@ from entity.AccessAddress import *
 from entity.AccessTime import *
 
 """
+Back IP
+"""
+backIp = "http://localhost:9006"
+
+"""
 基础数据接口
 """
-communityUrl = "http://localhost:9006/community"
-deviceUrl = "http://localhost:9006/device"
-personUrl = "http://localhost:9006/person"
-recordUrl = "http://localhost:9006/record"
+communityUrl = backIp + "/community"
+deviceUrl = backIp + "/device"
+personUrl = backIp + "/person"
+recordUrl = backIp + "/record"
 
 """
 统计分析数据接口
 """
-accessPersonUrl = "http://localhost:9006/access/person"
-accessDeviceUrl = "http://localhost:9006/access/device"
+accessPersonUrl = backIp + "/access/person"
+accessDeviceUrl = backIp + "/access/device"
 
 """
 HTTP参数
@@ -42,7 +48,8 @@ headers = {'content-type': 'application/json'}
 
 def getForAllPerson(communityId=""):
     """
-    获取所有person
+    获取该社区下的所有person
+
     :param: communityId社区ID，若不填，则全量
     :return: person[]
     """
@@ -53,9 +60,12 @@ def getForAllPerson(communityId=""):
         personJsonList = requests.get(personUrl, params={}, headers=headers).json().get("data")
 
     if personJsonList == "":
+        logging.warning("getForAllPerson fail")
         return None
     if personJsonList is None:
+        logging.warning("getForAllPerson fail")
         return None
+
     personList = []
     for personJson in personJsonList:
         personEntity = Person(personJson)
@@ -70,10 +80,14 @@ def getForAllRecord():
     :return: record[]
     """
     recordJsonList = requests.get(recordUrl, params={}, headers=headers).json().get("data")
+
     if recordJsonList == "":
+        logging.warning("getForAllRecord fail")
         return None
     if recordJsonList is None:
+        logging.warning("getForAllRecord fail")
         return None
+
     recordList = []
     for recordJson in recordJsonList:
         recordEntity = Record(recordJson)
@@ -92,10 +106,14 @@ def getForRecordByPersonId(personnelId):
     """
     request = {"personnelId": personnelId}
     recordJsonList = requests.get(recordUrl, params=request, headers=headers).json().get("data")
+
     if recordJsonList == "":
+        logging.warning("getForRecordByPersonId fail")
         return None
     if recordJsonList is None:
+        logging.warning("getForRecordByPersonId fail")
         return None
+
     recordList = []
     for recordJson in recordJsonList:
         recordEntity = Record(recordJson)
@@ -113,9 +131,12 @@ def getForAccessTimeByPersonId(personnelId):
     request = {"personnelId": personnelId}
     accessTimeJson = requests.get(accessPersonUrl + "/time", params=request, headers=headers).json().get("data")
     if accessTimeJson == "":
+        logging.warning("getForAccessTimeByPersonId fail")
         return None
     if accessTimeJson is None:
+        logging.warning("getForAccessTimeByPersonId fail")
         return None
+
     accessTime = AccessTime(accessTimeJson)
     return accessTime
 
@@ -129,10 +150,14 @@ def getForAccessAddressByPersonId(personnelId):
     """
     request = {"personnelId": personnelId}
     accessAddressJson = requests.get(accessPersonUrl + "/address", params=request, headers=headers).json().get("data")
+
     if accessAddressJson == "":
+        logging.warning("getForAccessAddressByPersonId fail")
         return None
     if accessAddressJson is None:
+        logging.warning("getForAccessAddressByPersonId fail")
         return None
+
     accessAddress = AccessAddress(accessAddressJson)
     return accessAddress
 
@@ -149,10 +174,14 @@ def getForYesterdayDeviceCount():
     # test数据 yesterday = "2019-05-28"
     request = {"logDate": yesterday}
     deviceCountJson = requests.get(accessDeviceUrl + "/countByDay", params=request, headers=headers).json().get("data")
+
     if deviceCountJson == "":
+        logging.warning("getForYesterdayDeviceCount fail")
         return None
     if deviceCountJson is None:
+        logging.warning("getForYesterdayDeviceCount fail")
         return None
+
     deviceCountList = []
     for deviceCountJson in deviceCountJson:
         deviceCount = DeviceAccessCount(deviceCountJson)
@@ -191,7 +220,7 @@ def testForAllApi():
     # print()
 
     # device测试
-    print(getForYesterdayDeviceCount())
+    # print(getForYesterdayDeviceCount())
 
 
 if __name__ == '__main__':
