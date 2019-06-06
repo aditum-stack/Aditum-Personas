@@ -16,7 +16,7 @@ image_path = os.getcwd() + '\\deviceCountClustering.png'
 clustering = 4
 
 # 1展示图片 0不展示
-show = 1
+show = 0
 
 
 def initDeviceCountData():
@@ -94,7 +94,7 @@ def run():
     # print("设备T+1访问热度聚类分析...开始")
 
     deviceCountList = initDeviceCountData()
-    print(deviceCountList)
+    # print(deviceCountList)
 
     # print("数据获取成功，开始分析...")
 

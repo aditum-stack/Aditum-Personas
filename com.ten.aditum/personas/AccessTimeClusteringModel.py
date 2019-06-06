@@ -16,7 +16,7 @@ image_path = os.getcwd() + '\\accessTimeClustering.png'
 clustering = 3
 
 # 1展示图片 0不展示
-show = 1
+show = 0
 
 
 def initPersonData():

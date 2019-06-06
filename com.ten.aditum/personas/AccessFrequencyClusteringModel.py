@@ -19,10 +19,10 @@ day_count_power = 5
 clustering = 4
 
 # 1展示图片 0不展示
-show = 1
+show = 0
 
 # 1打印日志 0不打印
-enableLog = 1
+enableLog = 0
 
 
 def initPersonData():
@@ -75,7 +75,7 @@ def kmeansClustering(entitySet, n_clusters=3):
     clf = KMeans(n_clusters=n_clusters)
     # 直接对数据进行聚类，聚类不需要进行预测
     y_pred = clf.fit_predict(entitySet)
-    print(type(clf.labels_))
+    # print(type(clf.labels_))
     return y_pred
 
 
@@ -137,10 +137,10 @@ def run():
     # 可视化结果并保存图片
     showAndSave(frequencyEntitySet, y_pred, show=show)
 
-    print("用户门禁使用依赖度聚类分析...结束")
-
-    for i in range(len(y_pred)):
-        print(personnelIdSet[i] + " " + str(y_pred[i]))
+    if enableLog != 0:
+        print("用户门禁使用依赖度聚类分析...结束")
+        for i in range(len(y_pred)):
+            print(personnelIdSet[i] + " " + str(y_pred[i]))
 
     # base64
     base64 = base64img()
